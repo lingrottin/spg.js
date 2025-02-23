@@ -1,15 +1,56 @@
-// SPG
-type SpgGenerationConfig = {
+/**
+ * @file SPG - The Simplest Strong Password Generator
+ * @description Helper for generating strong passwords
+ * @author Enita Nureya <enitanureya@outlook.com>
+ * @author RLt <ltfjx2333@gmail.com>
+ * @copyright 2025 University of Fool
+ */
+
+/**
+ * Configuration options for the generation.
+ */
+export type SpgGenerationConfig = {
+  /**
+   * Whether to use a cryptographically secure random number generator.
+   * @defaultValue `false`
+   */
   safe?: boolean;
+  /**
+   * The set of characters to use for generating the random string.
+   */
   characters: string;
 };
 
+/**
+ * The Simplest Strong Password Generator
+ * A utility class for generating random strings based on provided configuration.
+ */
 class Spg {
+  /**
+   * Whether to use a cryptographically secure random number generator.
+   */
   safe: boolean;
+  /**
+   * Generates a random string based on the provided configuration and length.
+   * @param config - The configuration for generating the random string. Can be a string or a {@link SpgGenerationConfig}.
+   * @param length - The length of the random string to generate.
+   * @returns The generated random string.
+   * @alias gen
+   */
   generate: (config: SpgGenerationConfig | string, length: number) => string;
-  // this acts as an alias
+  /**
+   * An alias for the `generate` method.
+   * @param config - The configuration for generating the random string. Can be a string or a {@link SpgGenerationConfig}.
+   * @param length - The length of the random string to generate.
+   * @returns The generated random string.
+   * @alias generate
+   */
   gen: (config: SpgGenerationConfig | string, length: number) => string;
 
+  /**
+   * Creates an instance of the {@link Spg} class.
+   * @param safe - Whether to use a cryptographically secure random number generator. Defaults to `false`.
+   */
   constructor(safe?: boolean) {
     function generate(
       this: Spg,
@@ -33,7 +74,7 @@ class Spg {
           `expected length to be a number, but get a(n) ${typeof length}`,
         );
       }
-      // converting a sting parameter to a SpgGenerationConfig
+      // converting a string parameter to a SpgGenerationConfig
       const makeConfig = (config_str: string): SpgGenerationConfig => {
         let safe = this.safe;
         let characters = "";
@@ -116,18 +157,36 @@ class Spg {
   }
 }
 
+/**
+ * Creates a new instance of the {@link Spg} class.
+ * @param safe - Whether to use a cryptographically secure random number generator. Defaults to `false`.
+ * @returns A new instance of {@link Spg}.
+ */
 export function create(safe?: boolean) {
   return new Spg(safe);
 }
+
 const spg_u: Spg = new Spg(false);
 const spg_s: Spg = new Spg(true);
-// if they are called within another context, binding can ensure their `this.safe` to be fixed
+
+/**
+ * [Unsafe] Generates a random string using the default unsafe random number generator.
+ * @param config - The configuration for generating the random string. Can be a string or a {@link SpgGenerationConfig}.
+ * @param length - The length of the random string to generate.
+ * @returns The generated random string.
+ */
 export const gen: (
   config: SpgGenerationConfig | string,
   length: number,
 ) => string = spg_u.generate.bind(spg_u);
+
+/**
+ * [Safe] Generates a random string using a cryptographically secure random number generator.
+ * @param config - The configuration for generating the random string. Can be a string or a {@link SpgGenerationConfig}.
+ * @param length - The length of the random string to generate.
+ * @returns The generated random string.
+ */
 export const gens: (
   config: SpgGenerationConfig | string,
   length: number,
 ) => string = spg_s.generate.bind(spg_s);
-export default spg_u;
