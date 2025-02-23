@@ -1,15 +1,15 @@
 {
-  "name": "spg",
+  "name": "sspg",
   "version": "0.1.0",
   "description": "The Simplest Strong Password Generator",
   "type": "module",
-  "main": "dist/spg.js",
+  "main": "dist/sspg.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lingrottin/spg.js.git"
+    "url": "https://github.com/lingrottin/sspg.js.git"
   },
   "bugs": {
-    "url": "https://github.com/lingrottin/spg.js/issues"
+    "url": "https://github.com/lingrottin/sspg.js/issues"
   },
   "scripts": {
     "test": "jest",
