@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
-    "lint": "biome lint",
+    "lint": "biome check --fix",
     "build": "rimraf dist && tsc && rolldown",
     "format": "biome format src --write",
     "watch": "tsc --watch"
