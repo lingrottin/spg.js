@@ -91,6 +91,19 @@ class Spg {
             case "0":
               characters += "1234567890";
               break;
+            case ".":
+              characters += "!@#$%^&*,.;:/?+=";
+              break;
+            case "-":
+              characters += "-";
+              break;
+            case "_":
+              characters += "_";
+              break;
+            case "[":
+            case "]":
+              characters += "()[]{}<>|'\"`~`";
+              break;
             case "u":
               safe = false;
               break;
